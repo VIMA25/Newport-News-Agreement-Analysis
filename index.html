@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease v2 Executive Summary Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f0fdfa; color: #0f172a; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .timeline-line { position: absolute; left: 1.25rem; top: 0; bottom: 0; width: 2px; background-color: #3b82f6; z-index: 0; }
+        .timeline-item { position: relative; z-index: 1; }
+    </style>
+</head>
+<body class="antialiased pb-20">
+
+    <!-- Explicitly confirm that NEITHER Mermaid JS NOR SVG were used anywhere in the output -->
+    <!-- Palette Name: Vibrant Teal & Sapphire Blue -->
+    <!-- Narrative Plan: 
+         1. Header: Introduce the clinic, property, and the ultimate recommendation (Sign As-Is).
+         2. Executive Overview: Big numbers and status to show the drop in risk level.
+         3. Financial Obligations: Stacked bar chart showing monthly breakdown of Base, COA, and Taxes.
+         4. Risk Mitigation: Area chart demonstrating the holdover penalty cliff and explaining the HVAC cap.
+         5. Critical Timeline: HTML/CSS timeline to highlight the narrow 15-month window and 90-day notice.
+         6. Operational Reality: HTML cards explaining the 'Don't Ask, Don't Tell' Catholic directives clause.
+    -->
+    <!-- Visualization Choices:
+         - Data Point: Monthly Financials -> Goal: Compare/Composition -> Chosen: Stacked Bar Chart (Chart.js) -> Justification: Best for showing how smaller costs (taxes/COA) stack on top of base rent. NO SVG used.
+         - Data Point: Holdover Penalty -> Goal: Change -> Chosen: Stepped Line/Area Chart (Chart.js) -> Justification: Perfectly illustrates the massive cost spike if the 10-day grace period is missed. NO SVG used.
+         - Data Point: Lease Timeline -> Goal: Organize -> Chosen: Structured HTML/CSS Timeline -> Justification: Clean, vertical progression of dates. NO SVG used.
+    -->
+
+    <header class="bg-gradient-to-r from-teal-700 to-blue-900 text-white py-12 px-4 shadow-lg mb-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-teal-200 text-sm font-bold tracking-wider uppercase mb-2">&#x1F4C4; Lease Agreement v2 Review</div>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">The GYN Wellness Center</h1>
+            <p class="text-xl text-blue-100 mb-6">&#x1F3E2; 716 Denbigh Blvd, Building E, Suite E-2</p>
+            <div class="inline-block bg-teal-500 text-white font-bold py-3 px-6 rounded-full shadow-md text-lg border-2 border-teal-300">
+                &#x2705; RECOMMENDATION: SIGN AS-IS
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 grid grid-cols-1 gap-12">
+
+        <section class="bg-white rounded-2xl shadow-md p-8 border-t-4 border-teal-500">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">&#x1F6A8; Executive Overview: Risk Successfully Mitigated</h2>
+            <p class="text-slate-600 mb-8 text-lg">The renegotiated v2 lease transforms a highly restrictive, long-term commercial boilerplate into a viable 15-month transitional agreement. The most critical financial traps have been neutralized, lowering the overall risk profile significantly.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 text-center">
+                    <div class="text-4xl mb-2">&#x1F4C9;</div>
+                    <div class="text-blue-900 font-bold text-xl mb-1">Risk Level</div>
+                    <div class="text-blue-700 font-semibold uppercase">Low / Moderate</div>
+                </div>
+                <div class="bg-teal-50 p-6 rounded-xl border border-teal-100 text-center">
+                    <div class="text-4xl mb-2">&#x23F1;</div>
+                    <div class="text-teal-900 font-bold text-xl mb-1">Commitment</div>
+                    <div class="text-teal-700 font-semibold uppercase">15 Months</div>
+                </div>
+                <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100 text-center">
+                    <div class="text-4xl mb-2">&#x1F6E1;</div>
+                    <div class="text-emerald-900 font-bold text-xl mb-1">HVAC Capital Risk</div>
+                    <div class="text-emerald-700 font-semibold uppercase">Strictly Capped</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-md p-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">&#x1F4B0; Monthly Financial Exposure</h2>
+            <p class="text-slate-600 mb-8">While base rent is the primary cost, the "Triple Net" style structure requires additional monthly contributions for Condominium Association (COA) fees and Real Estate Taxes. The chart below illustrates the total monthly cash outflow expected during the 15-month term.</p>
+            
+            <div class="chart-container">
+                <canvas id="financialsChart"></canvas>
+            </div>
+            
+            <div class="mt-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <p class="text-sm text-slate-700"><strong>Note:</strong> Base rent automatically escalates to $5,570.00 for the final two months (May & June 2027). Late payments (past 10 days) incur a penalty of $100 or 5%, whichever is greater.</p>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            
+            <section class="bg-white rounded-2xl shadow-md p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4">&#x26A0; The Holdover Penalty Cliff</h2>
+                <p class="text-slate-600 mb-6">A major win in v2 is the introduction of a 10-day grace period for holdovers. If your move-out is delayed, the penalty is capped at 125% for the first 10 days before skyrocketing to 200%.</p>
+                
+                <div class="chart-container h-64 sm:h-72">
+                    <canvas id="holdoverChart"></canvas>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-md p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4">&#x1F4C5; Critical 15-Month Timeline</h2>
+                <p class="text-slate-600 mb-6">Missing the termination notice deadline triggers an automatic year-to-year renewal with a 5% rent escalation.</p>
+                
+                <div class="relative pl-4 py-2">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item flex items-start mb-6">
+                        <div class="bg-teal-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow z-10 shrink-0">&#x25B6;</div>
+                        <div class="ml-4">
+                            <h3 class="font-bold text-slate-800">April 13, 2026</h3>
+                            <p class="text-teal-600 font-semibold">Commencement Date</p>
+                            <p class="text-sm text-slate-500">Take possession "As-Is" (No liability for prior build-outs).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item flex items-start mb-6">
+                        <div class="bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow z-10 shrink-0">&#x23F0;</div>
+                        <div class="ml-4 bg-red-50 p-3 rounded-lg border border-red-100">
+                            <h3 class="font-bold text-red-800">April 2, 2027</h3>
+                            <p class="text-red-600 font-bold uppercase">CRITICAL DEADLINE</p>
+                            <p class="text-sm text-red-700">Must issue written 90-day notice to terminate lease.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item flex items-start">
+                        <div class="bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow z-10 shrink-0">&#x23F9;</div>
+                        <div class="ml-4">
+                            <h3 class="font-bold text-slate-800">July 1, 2027</h3>
+                            <p class="text-slate-600 font-semibold">Termination Date</p>
+                            <p class="text-sm text-slate-500">Keys must be surrendered to avoid holdover penalties.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="bg-white rounded-2xl shadow-md p-8 border-l-4 border-blue-600">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">&#x1F3E5; Operational Realities & Legal Escape Hatches</h2>
+            <p class="text-slate-600 mb-6">While the financial risks have been capped, specific operational mandates remain in the text of the lease. The Landlord has provided contractual mechanisms to deal with these without altering the master Condominium Declaration.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-2">&#x26D4; The Catholic Directives</h3>
+                    <p class="text-sm text-slate-600 mb-3">The Declaration technically mandates compliance with Catholic ethical teachings, restricting standard GYN practices.</p>
+                    <div class="bg-teal-100 text-teal-900 p-3 rounded text-sm font-medium">
+                        <strong>The v2 Solution:</strong> "Don't Ask, Don't Tell." If the Condo Board ever enforces this and fines the Landlord, you must indemnify the fine, but you have the immediate contractual right to terminate the lease and walk away.
+                    </div>
+                </div>
+                
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-2">&#x1F527; The HVAC Amortization</h3>
+                    <p class="text-sm text-slate-600 mb-3">Instead of full replacement liability for an aging system left by a previous tenant.</p>
+                    <div class="bg-blue-100 text-blue-900 p-3 rounded text-sm font-medium">
+                        <strong>The v2 Solution:</strong> For any HVAC repair over $750 or a full replacement, your financial responsibility is strictly limited to the amortized fraction equal only to your remaining months on the lease.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            let words = label.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 <= 16) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const rawFinancialLabels = ['May 2026 - Apr 2027', 'May 2027 - Jun 2027'];
+        const financialLabels = rawFinancialLabels.map(wrapLabel);
+
+        const ctxFinancials = document.getElementById('financialsChart').getContext('2d');
+        new Chart(ctxFinancials, {
+            type: 'bar',
+            data: {
+                labels: financialLabels,
+                datasets: [
+                    {
+                        label: 'Base Rent',
+                        data: [5408.00, 5570.00],
+                        backgroundColor: '#1e3a8a'
+                    },
+                    {
+                        label: 'COA Fees',
+                        data: [573.59, 573.59],
+                        backgroundColor: '#0ea5e9'
+                    },
+                    {
+                        label: 'Real Estate Taxes',
+                        data: [478.39, 478.39],
+                        backgroundColor: '#14b8a6'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true },
+                    y: { 
+                        stacked: true,
+                        ticks: {
+                            callback: function(value) { return '$' + value; }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            },
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const rawHoldoverLabels = ['Days 1-10', 'Day 11+'];
+        const holdoverLabels = rawHoldoverLabels.map(wrapLabel);
+
+        const ctxHoldover = document.getElementById('holdoverChart').getContext('2d');
+        new Chart(ctxHoldover, {
+            type: 'line',
+            data: {
+                labels: holdoverLabels,
+                datasets: [{
+                    label: 'Penalty % of Base Rent',
+                    data: [125, 200],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                    borderWidth: 3,
+                    fill: true,
+                    stepped: 'middle',
+                    pointBackgroundColor: '#b91c1c',
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 250,
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            },
+                            label: function(context) {
+                                return 'Penalty: ' + context.parsed.y + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
